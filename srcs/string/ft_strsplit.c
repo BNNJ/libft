@@ -27,6 +27,20 @@ static int	word_count(char const *s, char c)
 	return (wc);
 }
 
+static void	*ft_strsplit_free(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		++i;
+	}
+	free(tab);
+	return (NULL);
+}
+
 char		**ft_strsplit(char const *s, char c)
 {
 	char	**tab;
@@ -36,7 +50,7 @@ char		**ft_strsplit(char const *s, char c)
 	i = 0;
 	if (s == NULL)
 		return (NULL);
-	if (!(tab = (char**)malloc(sizeof(char*) * (word_count(s, c) + 1))))
+	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (word_count(s, c) + 1))))
 		return (NULL);
 	while (*s)
 	{
@@ -46,7 +60,8 @@ char		**ft_strsplit(char const *s, char c)
 		while (s[len] != c && s[len])
 			++len;
 		if (len != 0)
-			tab[i++] = ft_strsub(s, 0, len);
+			if (!(tab[i++] = ft_strsub(s, 0, len)))
+				return (ft_strsplit_free(tab));
 		s += len;
 	}
 	tab[i] = 0;
