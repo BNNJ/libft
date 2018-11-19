@@ -40,7 +40,7 @@ static t_file_rd	*init_file(int fd, t_file_rd *file)
 	return (new_file);
 }
 
-static int			terminate_file(t_file_rd **file)
+static int			terminate_file(t_file_rd **file, char **line)
 {
 	t_file_rd	*tmp;
 
@@ -61,8 +61,11 @@ static int			terminate_file(t_file_rd **file)
 		tmp->next = (*file)->next;
 	}
 	tmp = (*file)->start;
+	if ((*file)->string)
+		ft_tstr_del(&(*file)->string);
 	free(*file);
 	*file = tmp;
+	ft_strdel(line);
 	return (0);
 }
 
@@ -90,9 +93,15 @@ static int			process_buffer(t_file_rd **file, char **line)
 		len = (*file)->string->len;
 		ft_tstr_del(&((*file)->string));
 		if ((*file)->rd_len < BUFF_SIZE && len == 0)
-			return (terminate_file(file));
+			return (terminate_file(file, line));
 	}
 	return (BINARY ? len : 1);
+}
+
+static int			close_file(t_file_rd **file, t_string *buffer)
+{
+	ft_tstr_del(&buffer);
+	return (terminate_file(file, NULL));
 }
 
 int					get_next_line(int fd, char **line)
@@ -101,10 +110,13 @@ int					get_next_line(int fd, char **line)
 	t_string			*buffer;
 	int					rd_check;
 
-	rd_check = 1;
-	if (fd < 0 || !line || !(file = init_file(fd, file))
+	rd_check = 1;	
+	if (fd < 0 || !(file = init_file(fd, file))
 		|| !(buffer = ft_tstr_new(BUFF_SIZE)))
 		return (-1);
+	if (line == NULL)
+		return (close_file(&file, buffer));
+	ft_strdel(line);
 	while (rd_check)
 	{
 		if ((file->rd_len = read(fd, buffer->content, BUFF_SIZE)) < 0)

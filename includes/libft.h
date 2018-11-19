@@ -21,6 +21,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stddef.h>
+# include <stdint.h>
 
 typedef struct			s_list
 {
@@ -117,7 +119,7 @@ void					*ft_memalloc(size_t size);
 void					ft_memdel(void **ap);
 
 int						ft_atoi(const char *str);
-int						ft_strtoi(const char **str);
+int						ft_strtoi(char **str);
 char					*ft_itoa(int n);
 char					*ft_lltoa_base(long long int n, char base_len, char opt,
 	int pad);

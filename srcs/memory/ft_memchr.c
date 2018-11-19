@@ -10,14 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
+	uint8_t	*mem;
+	uint8_t	ch;
+
+	ch = (uint8_t)c;
+	mem = (uint8_t*)s;
 	while (n--)
 	{
-		if (*(unsigned char*)s == (unsigned char)c)
-			return ((void*)s);
+		if (*mem == ch)
+			return ((void*)mem);
 		++s;
 	}
 	return (NULL);

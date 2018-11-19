@@ -39,6 +39,7 @@ SRC_DISP	=	ft_putchar.c		\
 
 DIR_CONV	=	conversion/
 SRC_CONV	=	ft_atoi.c			\
+				ft_strtoi.c			\
 				ft_itoa.c			\
 				ft_lltoa_base.c		\
 				ft_ulltoa_base.c

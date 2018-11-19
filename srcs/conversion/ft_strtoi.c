@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strtoi(const char **str)
+int		ft_strtoi(char **str)
 {
 	short				sign;
 	unsigned long long	result;
