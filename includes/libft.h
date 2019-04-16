@@ -58,12 +58,12 @@ typedef struct			s_file_rd
 
 # define GSTD_BUFSIZ 1024
 
-typedef struct	s_stdbuf
+typedef struct			s_stdbuf
 {
 	size_t			size;
 	struct s_stdbuf	*next;
 	char			buf[GSTD_BUFSIZ];
-}				t_stdbuf;
+}						t_stdbuf;
 
 /*
 ** math stuff
@@ -143,7 +143,7 @@ size_t					ft_strlcat(char *dst, const char *src, size_t size);
 char					*ft_strchr(const char *s, int c);
 char					*ft_strrchr(const char *s, int c);
 char					*ft_strjoin(char const *s1, char const *s2);
-char					*ft_strjoin_f(char *s1, char *s2, int opt);
+char					*ft_strjoin_f(char *s1, char *s2, uint8_t opt);
 char					*ft_strtrim(char const *s);
 int						get_next_line(int fd, char **line);
 int						ft_findchar(char *str, char c);

@@ -154,7 +154,10 @@ SRC_MATH	=	ft_mat4_rotx.c		\
 				ft_vec4_by_mat4.c	\
 				ft_vec4_by_scalar.c	\
 				ft_vec4_len.c		\
-				ft_vec4_scalprod.c
+				ft_vec4_scalprod.c	\
+				rpn_calc.c			\
+				rpn_calc_op.c		\
+				rpn_calc_stack.c
 
 
 OBJ_DIR		=	./obj/
@@ -173,7 +176,7 @@ OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ))
 
 INC_DIR		=	./includes/
 INCS		=	$(addprefix $(INC_DIR), $(INC))
-INC			=	libft.h
+INC			=	libft.h rpn_calc.h
 
 all: $(NAME)
 
