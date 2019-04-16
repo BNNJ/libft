@@ -15,6 +15,17 @@
 
 t_rpnfunc	g_optab[5] = {&op_add, &op_sub, &op_mul, &op_div, &op_mod};
 
+static int	rpn_error(t_rpn_stack *a, t_rpn_stack *b,
+	t_rpn_node *op, int err_code)
+{
+	free(op);
+	while (a->size > 0)
+		pop_f(a);
+	while (b->size > 0)
+		pop_f(b);
+	return (err_code);
+}
+
 int			rpn_calc(t_rpn_stack *s, int *ret)
 {
 	t_rpn_stack	tmp;
@@ -27,15 +38,15 @@ int			rpn_calc(t_rpn_stack *s, int *ret)
 			push(&tmp, pop(s));
 		op = pop(s);
 		if (tmp.size < 2)
-			return (1);
+			return (rpn_error(s, &tmp, op, 1));
 		if (!g_optab[op->val](pop_f(&tmp), pop_f(&tmp), ret))
-			return (2);
+			return (rpn_error(s, &tmp, op, 2));
 		op->val = *ret;
 		op->type = T_VAL;
 		push(&tmp, op);
 	}
 	*ret = pop_f(&tmp);
 	if (tmp.size > 0 || s->size > 0)
-		return (1);
+		return (rpn_error(s, &tmp, op, 1));
 	return (0);
 }
