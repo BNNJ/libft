@@ -13,6 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
+/*
 static int	word_count(char const *s, char c)
 {
 	int		wc;
@@ -66,4 +67,34 @@ char		**ft_strsplit(char const *s, char c)
 	}
 	tab[i] = 0;
 	return (tab);
+}
+*/
+
+char	**ft_strsplit(char *str, char c)
+{
+	static int	i = 0;
+	char		**arr;
+	int			len;
+
+	len = 0;
+	while (*str == c)
+		++str;
+	while (str[len] && str[len] != c)
+		++len;
+	++i;
+	if (!(arr = len == 0 ? malloc(sizeof(char*) * i) : ft_strsplit(str + len)))
+		return (NULL);
+	if (len == 0)
+		arr[--i] = NULL;
+	else if (!(arr[--i] = malloc(sizeof(char) * len)))
+	{
+		while (arr[++i])
+			free(arr[i]);
+		free(arr);
+		return (NULL);
+	}
+	len ? arr[i][len] = 0 : 0;
+	while (--len >= 0)
+		arr[i][len] = str[len];
+	return (arr);
 }

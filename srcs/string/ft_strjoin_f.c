@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char		*ft_strjoin_f(char *s1, char *s2, int opt)
+char		*ft_strjoin_f(char *s1, char *s2, uint8_t opt)
 {
 	char	*str;
 	int		i;
@@ -24,18 +24,18 @@ char		*ft_strjoin_f(char *s1, char *s2, int opt)
 	if (!s1 && !s2)
 		return (NULL);
 	else if (s1 && !s2)
-		return (opt == 1 || opt == 3 ? s1 : ft_strdup(s1));
+		return (opt & 1 ? s1 : ft_strdup(s1));
 	else if (!s1 && s2)
-		return (opt == 2 || opt == 3 ? s2 : ft_strdup(s2));
+		return (opt & 2 ? s2 : ft_strdup(s2));
 	if (!(str = ft_strnew(ft_strlen(s1) + ft_strlen(s2))))
 		return (NULL);
 	while (s1[++i])
 		str[i] = s1[i];
 	while (s2[++j])
 		str[i + j] = s2[j];
-	if (opt == 1 || opt == 3)
+	if (opt & 1)
 		ft_strdel(&s1);
-	if (opt == 2 || opt == 3)
+	if (opt & 2)
 		ft_strdel(&s2);
 	return (str);
 }
