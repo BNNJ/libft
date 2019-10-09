@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_swap_bytes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfragnou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/04 15:24:59 by pfragnou          #+#    #+#             */
-/*   Updated: 2018/04/04 15:25:01 by pfragnou         ###   ########.fr       */
+/*   Created: 2019/04/13 23:08:13 by pfragnou          #+#    #+#             */
+/*   Updated: 2019/04/13 23:08:14 by pfragnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strstr(const char *haystack, const char *needle)
+int		ft_swap_int16(int nb)
 {
-	if (!*needle)
-		return ((char*)haystack);
-	if (!*haystack)
-		return (0);
-	return ((*needle == *haystack && ft_strstr(haystack + 1, needle + 1)
-		== haystack + 1) ? (char*)haystack : ft_strstr(haystack + 1, needle));
+	return ((nb & 0xff00) >> 8 | (nb & 0x00ff) << 8);
+}
+
+int		ft_swap_int32(int nb)
+{
+	return ((nb & 0xff000000) >> 24
+		| (nb & 0x00ff0000) >> 8
+		| (nb & 0x0000ff00) << 8
+		| (nb & 0x000000ff) << 24);
 }

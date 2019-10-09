@@ -45,7 +45,7 @@ static void	*ft_strsplit_free(char **tab)
 char		**ft_strsplit(char const *s, char c)
 {
 	char	**tab;
-	size_t	len;
+	size_t	l;
 	int		i;
 
 	i = 0;
@@ -55,46 +55,46 @@ char		**ft_strsplit(char const *s, char c)
 		return (NULL);
 	while (*s)
 	{
-		len = 0;
+		l = 0;
 		while (*s == c && *s)
 			++s;
-		while (s[len] != c && s[len])
-			++len;
-		if (len != 0)
-			if (!(tab[i++] = ft_strsub(s, 0, len)))
+		while (s[l] != c && s[l])
+			++l;
+		if (l != 0)
+			if (!(tab[i++] = ft_strsub(s, 0, l)))
 				return (ft_strsplit_free(tab));
-		s += len;
+		s += l;
 	}
 	tab[i] = 0;
 	return (tab);
 }
 */
 
-char	**ft_strsplit(char *str, char c)
+char	**ft_strsplit(const char *str, char c)
 {
 	static int	i = 0;
 	char		**arr;
-	int			len;
+	int			l;
 
-	len = 0;
+	l = 0;
 	while (*str == c)
 		++str;
-	while (str[len] && str[len] != c)
-		++len;
+	while (str[l] && str[l] != c)
+		++l;
 	++i;
-	if (!(arr = len == 0 ? malloc(sizeof(char*) * i) : ft_strsplit(str + len)))
+	if (!(arr = l == 0 ? malloc(sizeof(char*) * i) : ft_strsplit(str + l, c)))
 		return (NULL);
-	if (len == 0)
+	if (l == 0)
 		arr[--i] = NULL;
-	else if (!(arr[--i] = malloc(sizeof(char) * len)))
+	else if (!(arr[--i] = malloc(sizeof(char) * l)))
 	{
 		while (arr[++i])
 			free(arr[i]);
 		free(arr);
 		return (NULL);
 	}
-	len ? arr[i][len] = 0 : 0;
-	while (--len >= 0)
-		arr[i][len] = str[len];
+	l ? arr[i][l] = 0 : 0;
+	while (--l >= 0)
+		arr[i][l] = str[l];
 	return (arr);
 }

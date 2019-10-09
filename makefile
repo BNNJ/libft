@@ -39,6 +39,7 @@ SRC_DISP	=	ft_putchar.c		\
 
 DIR_CONV	=	conversion/
 SRC_CONV	=	ft_atoi.c			\
+				ft_atoi_v.c			\
 				ft_strtoi.c			\
 				ft_itoa.c			\
 				ft_lltoa_base.c		\
@@ -75,9 +76,7 @@ SRC_STR		=	ft_strdup.c			\
 				ft_strsub_f.c		\
 				ft_strtrim.c		\
 				ft_strchr.c			\
-				ft_findchar.c		\
-				ft_strchrs.c		\
-				ft_strchrsp.c
+				ft_findchar.c
 
 DIR_MEM		=	memory/
 SRC_MEM		=	ft_memchr.c			\
@@ -88,7 +87,8 @@ SRC_MEM		=	ft_memchr.c			\
 				ft_memalloc.c		\
 				ft_memdel.c			\
 				ft_memccpy.c		\
-				ft_bzero.c
+				ft_bzero.c			\
+				ft_swap_bytes.c
 
 DIR_TSTR	=	tstr/
 SRC_TSTR	=	ft_tstr_new.c		\
@@ -122,7 +122,8 @@ SRC_MISC	=	ft_isalnum.c		\
 				ft_tolower.c		\
 				ft_toupper.c		\
 				get_next_line.c		\
-				ft_get_stdin.c
+				ft_get_stdin.c		\
+				ft_getopt.c
 
 DIR_MATH	=	math/
 SRC_MATH	=	ft_mat4_rotx.c		\
