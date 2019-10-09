@@ -23,6 +23,7 @@
 # include <math.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <limits.h>
 
 typedef struct			s_list
 {
@@ -64,6 +65,13 @@ typedef struct			s_stdbuf
 	struct s_stdbuf	*next;
 	char			buf[GSTD_BUFSIZ];
 }						t_stdbuf;
+
+/*
+** ft_getopt error bit and error message buffer
+*/
+
+# define OPT_ERRBIT 31
+extern char	g_opterr[32];
 
 /*
 ** math stuff
@@ -118,7 +126,11 @@ int						ft_memcmp(const void *s1, const void *s2, size_t n);
 void					*ft_memalloc(size_t size);
 void					ft_memdel(void **ap);
 
+int						ft_swap_int16(int nb);
+int						ft_swap_int32(int nb);
+
 int						ft_atoi(const char *str);
+int						ft_atoi_v(const char *str, int *ret);
 int						ft_strtoi(char **str);
 char					*ft_itoa(int n);
 char					*ft_lltoa_base(long long int n, char base_len, char opt,
@@ -147,8 +159,6 @@ char					*ft_strjoin_f(char *s1, char *s2, uint8_t opt);
 char					*ft_strtrim(char const *s);
 int						get_next_line(int fd, char **line);
 int						ft_findchar(char *str, char c);
-char					*ft_strchrs(const char *s, int c);
-char					*ft_strchrsp(const char *s, int c);
 
 int						ft_isalpha(int c);
 int						ft_isdigit(int c);
@@ -244,5 +254,12 @@ t_mat4					ft_mat4_roty(double angle);
 t_mat4					ft_mat4_rotz(double angle);
 t_mat4					ft_mat4_scale(double x, double y, double z);
 t_mat4					ft_mat4_trslt(double x, double y, double z);
+
+/*
+** misc
+*/
+
+int					ft_getopt(char const **argv,
+	char const *optstr, char const **opttab);
 
 #endif
