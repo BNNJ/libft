@@ -38,15 +38,17 @@ int			ft_getopt(char const **argv,
 	char const *optstr, char const **opttab)
 {
 	int		options;
+	int		i;
 
 	options = 0;
 	while (*++argv)
 	{
 		if ((*argv)[0] == '-')
 		{
+			i = 0;
 			if ((*argv)[1] != '-')
-				while (*++(*argv))
-					options |= (1 << shortopt(**argv, optstr));
+				while ((*argv)[++i])
+					options |= (1 << shortopt((*argv)[i], optstr));
 			else if ((*argv)[1] == '-')
 			{
 				if ((*argv)[2])
