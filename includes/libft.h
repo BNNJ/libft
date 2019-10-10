@@ -72,6 +72,7 @@ typedef struct			s_stdbuf
 
 # define OPT_ERRBIT 31
 extern char	g_opterr[32];
+extern int	g_optind;
 
 /*
 ** math stuff

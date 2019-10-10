@@ -1,6 +1,7 @@
 #include "libft.h"
 
-char g_opterr[32] = {0};
+char 	g_opterr[32] = {0};
+int		g_optind = 0;
 
 static int	shortopt(char const arg, char const *optstr)
 {
@@ -41,24 +42,25 @@ int			ft_getopt(char const **argv,
 	int		i;
 
 	options = 0;
-	while (*++argv)
-	{
-		if ((*argv)[0] == '-')
+	while (argv[++g_optind])
+		if (argv[g_optind][0] == '-')
 		{
 			i = 0;
-			if ((*argv)[1] != '-')
-				while ((*argv)[++i])
-					options |= (1 << shortopt((*argv)[i], optstr));
-			else if ((*argv)[1] == '-')
+			if (argv[g_optind][1] != '-')
+				while (argv[g_optind][++i])
+					options |= (1 << shortopt(argv[g_optind][i], optstr));
+			else if (argv[g_optind][1] == '-')
 			{
-				if ((*argv)[2])
+				if (argv[g_optind][2])
 					options |= (1 << longopt(*argv + 2, opttab));
 				else
+				{
+					++g_optind;
 					break;
+				}
 			}
 		}
 		else
 			break;
-	}
 	return (options);
 }
