@@ -12,7 +12,8 @@ SRC_DIR 	=	SRC_DISP	\
 				SRC_STR		\
 				SRC_TSTR	\
 				SRC_MISC	\
-				SRC_MATH 
+				SRC_MATH	\
+				SRC_SORT
 
 
 SRC = 			$(addprefix $(DIR_DISP), $(SRC_DISP)) 	\
@@ -22,7 +23,8 @@ SRC = 			$(addprefix $(DIR_DISP), $(SRC_DISP)) 	\
 				$(addprefix $(DIR_MEM), $(SRC_MEM))		\
 				$(addprefix $(DIR_LIST), $(SRC_LIST))	\
 				$(addprefix $(DIR_MISC), $(SRC_MISC))	\
-				$(addprefix $(DIR_MATH), $(SRC_MATH))
+				$(addprefix $(DIR_MATH), $(SRC_MATH))	\
+				$(addprefix $(DIR_SORT), $(SRC_MISC))
 
 SRCS 		=	$(addprefix ./srcs/, $(SRC))
 
@@ -160,6 +162,10 @@ SRC_MATH	=	ft_mat4_rotx.c		\
 				rpn_calc_op.c		\
 				rpn_calc_stack.c
 
+DIR_SORT	=	sort/
+SRC_SORT	=	qsort.c				\
+				insertsort.c		\
+				qstack.c
 
 OBJ_DIR		=	./obj/
 OBJ			=	$(SRC_CONV:.c=.o)	\
@@ -169,7 +175,8 @@ OBJ			=	$(SRC_CONV:.c=.o)	\
 				$(SRC_LIST:.c=.o)	\
 				$(SRC_MISC:.c=.o)	\
 				$(SRC_MEM:.c=.o) 	\
-				$(SRC_MATH:.c=.o)
+				$(SRC_MATH:.c=.o)	\
+				$(SRC_SORT:.c=.o)
 
 
 OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ))
@@ -177,7 +184,7 @@ OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ))
 
 INC_DIR		=	./includes/
 INCS		=	$(addprefix $(INC_DIR), $(INC))
-INC			=	libft.h rpn_calc.h
+INC			=	libft.h rpn_calc.h qsort.h
 
 all: $(NAME)
 
@@ -200,6 +207,8 @@ $(OBJ_DIR)%.o:	./srcs/$(DIR_DISP)%.c $(INCS)
 $(OBJ_DIR)%.o:	./srcs/$(DIR_CONV)%.c $(INCS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 $(OBJ_DIR)%.o:	./srcs/$(DIR_MATH)%.c $(INCS)
+	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o:	./srcs/$(DIR_SORT)%.c $(INCS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 message:
