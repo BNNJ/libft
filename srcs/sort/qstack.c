@@ -1,7 +1,7 @@
 #include "qsort.h"
 
-t_qnode stack[STACK_SIZE];
-t_qnode	*top = stack;
+static t_qnode stack[STACK_SIZE];
+static t_qnode	*top = stack;
 
 void	qpush(char *low, char *high)
 {
@@ -15,6 +15,11 @@ void	qpop(char **low, char **high)
 	--top;
 	*low = top->lo;
 	*high = top->hi;
+}
+
+int		qempty(void)
+{
+	return (top == stack);
 }
 
 void	qswap(char *a, char *b, size_t s)

@@ -6,7 +6,7 @@
 # include <unistd.h>
 
 # define STACK_SIZE 64
-# define QBOUND		8
+# define QBOUND		4
 
 typedef int (*cmp_func)(const void*, const void*);
 
@@ -23,10 +23,9 @@ extern cmp_func	g_cmp;
 ** stack handling
 */
 
-extern t_qnode	stack[];
-extern t_qnode	*top;
 void	qpush(char *low, char *hi);
 void	qpop(char **low, char **hi);
+int		qempty(void);
 
 /*
 ** sorting
